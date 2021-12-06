@@ -6,11 +6,14 @@ typedef struct listNode {
     struct listNode* link;
 }listNode;
 
-int InputEnglishWord() {
+int InsertNewNode();
+int InputEnglishWord();
 
+int main() {
+    InsertNewNode();
 }
 
-int main()
+int InsertNewNode() 
 {
-
+    return 0;
 }
