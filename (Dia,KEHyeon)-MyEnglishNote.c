@@ -49,19 +49,19 @@ linkedList_h* createLinkedList_h() {
     return L;
 }
 
-void insertLastNode(linkedList_h* L, char* x)
-{
-    ====== =
-        int InsertNewNode();
-    int InputEnglishWord();
+void freeLinkedList_h(linkedList_h* L) {
+    free(L);
+}
 
-    int main() {
-        InsertNewNode();
-    }
-
-    int InsertNewNode()
+void printList(linkedList_h* L) {
+    listNode* p;
+    printf("L = (");
+    p = L->head;
+    while (p!=NULL) 
     {
-        return 0;
-        >>>>>> > bfd577e6040adebb8fe4b91b48fffa69af0d9b69
+        printf("%s", p->data);
+        p = p->link;
+        if (p != NULL) printf(",");
     }
-
+    printf(") \n");
+}
