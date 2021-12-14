@@ -1,6 +1,7 @@
 ﻿#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#define MAX_LENGTHS 25
 
 typedef struct listNode {
     char data[25];
@@ -38,8 +39,32 @@ int main() {
     linkedList_h* L;
     listNode* p;
 
-    printf("공백리스트를 생성\n");
-    L = createLinkedList_h();  //create new LinkedList
+    printf("(1) 공백리스트 생성하기! \n");
+    L = createLinkedList_h();  //create new linkedlist
+    printList(L);
+
+    printf("(2) 리스트 처음에 [수]노드 삽입하기! \n");
+    insertFirstNode(L, "수");  //insert first node in linkedlist 
+    printList(L);
+
+    printf("(3) 리스트 마지막에 [금]노드 삽입하기! \n");
+    insertLastNode(L, "금");  //insert last node in linkedlist
+    printList(L);
+
+    printf("(4) 리스트 첫 번째에 [월]노드 삽입하기! \n");
+    insertFirstNode(L, "월");  //insert any place node in linkedlist
+    printList(L);
+
+    printf("(5) 리스트에서 [수] 노드를 찾아 그 뒤에 [목] 삽입하기! \n");
+    p = searchNode(L, "수");  //search in linkedlist
+    if (p == NULL) printf("찾는 데이터가 없습니다.\n");
+    else insertMiddleNode(L, p, "목");
+    printList(L);
+
+    printf("(6) 리스트 공간을 해제하여 공백 리스트로 만들기! \n");
+    freeLinkedList_h(L);  //Dobby is Free!
+    printList(L);
+    return 0;
 }
 
 linkedList_h* createLinkedList_h() {
@@ -64,4 +89,45 @@ void printList(linkedList_h* L) {
         if (p != NULL) printf(",");
     }
     printf(") \n");
+}
+
+void insertFirstNode(linkedList_h* L, char* x) {
+    listNode* newNode;
+    newNode = (listNode*)malloc(sizeof(listNode));
+    strcpy_s(newNode->data, MAX_LENGTHS,x);
+    newNode->link = L->head;
+    L->head = newNode;
+}
+
+void insertMiddleNode(linkedList_h* L, listNode* pre, char* x) {
+    listNode* newNode;
+    newNode = (listNode*)malloc(sizeof(listNode));
+    strcpy_s(newNode->data, MAX_LENGTHS, x);
+    newNode->link = pre->link;
+    pre->link = newNode;
+}
+
+void insertLastNode(linkedList_h* L, char* x) {
+    listNode* lastNode;
+    listNode* temp;
+    lastNode = (listNode*)malloc(sizeof(listNode));
+    strcpy_s(lastNode->data, MAX_LENGTHS , x);
+    lastNode->link = NULL;
+    if (L->head == NULL) {
+        L->head = lastNode;
+        return;
+    }
+
+    temp = L->head;
+    while (temp->link != NULL) temp = temp->link;
+    temp->link = lastNode;
+}
+
+listNode* searchNode(linkedList_h* L, char* x) {
+    listNode* p;
+    p = L->head;
+    while (p != NULL) {
+        if (strcmp((p->data), x) == 0) return p;
+        p = p->link;
+    }
 }
