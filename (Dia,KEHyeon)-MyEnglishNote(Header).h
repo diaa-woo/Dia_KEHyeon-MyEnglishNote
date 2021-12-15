@@ -1,5 +1,7 @@
 #define MAX_LENGTHS 25
 
+static int nullCount = 0;
+
 typedef struct listNode {
     char data[25];
     struct listNode* link;
@@ -8,6 +10,12 @@ typedef struct listNode {
 typedef struct {
     listNode* head;
 }linkedList_h;;
+
+// 자동으로 파일을 열어주고, 연결리스트에 저장해줌.
+FILE* file(FILE* fp, linkedList_h* L);
+
+// 현재 연결리스트에 있는 값들을 메모장에 저장해 준다.
+void saveFile(FILE* fp, linkedList_h L);
 
 // 공백 연결 리스트 생성
 linkedList_h* createLinkedList_h();

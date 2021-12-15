@@ -7,10 +7,33 @@ int main() {
     int menu = 1;
     linkedList_h* L;
     listNode* p;
+    FILE* fp = 0;
 
-    printf("Making LinkedList...\n");
-    L = createLinkedList_h();  //create new linkedlist
+    printf("Welcome!\n\n");
+    printf("==============================================\n");
 
+    nullCount = 0;
+    while (1) {
+        printf("Making LinkedList...\n");
+        L = createLinkedList_h();  //create new linkedlist
+        if (L != NULL) break;
+        else printf("It's failed! retry...\n");
+        nullCount++;
+    }
+    if (nullCount) printf("Error counts: %d\n", nullCount);
+    nullCount = 0;
+    printf("==============================================\n");
+
+    while (1) {
+        printf("File opening...\n");
+        fp = file(fp, L);
+        if (fp != NULL) break;
+        else printf("It's Failed! retry...\n");
+        nullCount++;
+    }
+    if (nullCount) printf("Error counts: %d\n", nullCount);
+    nullCount = 0;
+    
     printFirst();  //Print some sentences when it start
 
     while (menu != 0) {
@@ -35,8 +58,10 @@ int main() {
         }
     }
 
-    printf("Unlink LinkedList...");
+    printf("Unlink LinkedList...\n");
+    printf("==============================================\n");
     freeLinkedList_h(L);
+    printf("Done! Thank you!\n");
     return 0;
 }
 
@@ -49,7 +74,7 @@ int printMenu() {
     int menu;
     printf("==============================================\n");
     printf("Here is your menu!\n");
-    printf("1. Manual!");
+    printf("1. Manual!\n");
     printf("2. Enter New English vocabulary.\n");
     printf("3. Delete English vocabulary.\n");
     printf("4. Print all vocabulary.\n");
@@ -63,6 +88,10 @@ int printMenu() {
         printf("You entered wrong number! Please enter again! : ");
         scanf_s("%d", &menu);
     }
+
+}
+
+FILE* file(FILE* fp, linkedList_h* L) {
 
 }
 
@@ -86,7 +115,9 @@ void manual() {
 }
 
 void NewEnglishVoca() {
-
+    char voca[25] = { 0, };
+    printf("Enter here!: ");
+    scanf_s("%s", &voca);
 }
 
 void DeleteEnglishVoca() {
