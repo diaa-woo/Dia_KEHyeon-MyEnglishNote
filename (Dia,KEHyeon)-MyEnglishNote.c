@@ -9,7 +9,7 @@ int main() {
     listNode* p;
     FILE* fp = 0;
 
-    printf("Welcome!\n\n");
+    printf("Welcome! MyEnglishNote ver b1.0.0!\n\n");
     printf("==============================================\n");
 
     nullCount = 0;
@@ -20,7 +20,8 @@ int main() {
         else printf("It's failed! retry...\n");
         nullCount++;
     }
-    if (nullCount) printf("Error counts: %d\n", nullCount);
+    if (nullCount) printf("Linked! But...\nError counts: %d\n", nullCount);
+    else printf("Linked!\n");
     nullCount = 0;
     printf("==============================================\n");
 
@@ -31,7 +32,8 @@ int main() {
         else printf("It's Failed! retry...\n");
         nullCount++;
     }
-    if (nullCount) printf("Error counts: %d\n", nullCount);
+    if (nullCount) printf("Opened! But...\nError counts: %d\n", nullCount);
+    else printf("Opened!\n");
     nullCount = 0;
     
     printFirst();  //Print some sentences when it start
@@ -57,10 +59,11 @@ int main() {
             break;
         }
     }
-
+    fclose(fp);
     printf("Unlink LinkedList...\n");
-    printf("==============================================\n");
     freeLinkedList_h(L);
+    printf("Unlinked!\n");
+    printf("==============================================\n");
     printf("Done! Thank you!\n");
     return 0;
 }
@@ -92,7 +95,15 @@ int printMenu() {
 }
 
 FILE* file(FILE* fp, linkedList_h* L) {
-    fp = fopen_s("C:/Users\SW2148\source\repos\(Dia,KEHyeon)-MyEnglishNote", "EnglishVocabulary", "r");
+    char buf[200] = { 0, };
+    fp = fopen_s(&fp, "EnglishVocabulary.txt", "r+");
+    if (fp == NULL) return fp;
+    while (feof(fp) == 0) {
+        fgets(buf, 200, fp);
+        if (buf[0] == '[' && buf[2] == ']') continue;
+        else if (buf[0] == '-' && buf[8] == '-') continue;
+        printf("%s", buf);
+    }
     return fp;
 }
 
@@ -118,7 +129,7 @@ void manual() {
 void NewEnglishVoca() {
     char voca[25] = { 0, };
     printf("Enter here!: ");
-    scanf_s("%s", &voca);
+    scanf_s("%s", &voca, sizeof(voca));
 }
 
 void DeleteEnglishVoca() {
@@ -142,6 +153,7 @@ linkedList_h* createLinkedList_h() {
 
 void freeLinkedList_h(linkedList_h* L) {
     free(L);
+    
 }
 
 void printList(linkedList_h* L) {

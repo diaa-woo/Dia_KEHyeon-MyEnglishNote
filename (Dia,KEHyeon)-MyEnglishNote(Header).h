@@ -4,6 +4,7 @@ static int nullCount = 0;
 
 typedef struct listNode {
     char data[25];
+    char korean[50];
     struct listNode* link;
 }listNode;
 
