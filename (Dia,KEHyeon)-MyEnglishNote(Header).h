@@ -37,7 +37,7 @@ void manual();
 void printFirst();
 
 // 메뉴들을 출력해주고 메뉴값을 리턴시켜줌
-void printMenu();
+int printMenu();
 
 //새로운 영어단어를 입력받아줌
 void NewEnglishVoca();

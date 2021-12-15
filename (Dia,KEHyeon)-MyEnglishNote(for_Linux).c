@@ -1,7 +1,7 @@
 ﻿#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <(Dia,KEHyeon)-MyEnglishNote(Header).h>
+#include "(Dia,KEHyeon)-MyEnglishNote(Header).h"
 
 int main() {
     int menu = 1;
@@ -31,6 +31,7 @@ int main() {
                 break;
             case 5:
                 TestEnglishVoca();
+                break;
         }
     }
     
