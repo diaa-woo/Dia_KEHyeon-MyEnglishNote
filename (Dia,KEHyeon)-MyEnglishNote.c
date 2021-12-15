@@ -67,7 +67,7 @@ int printMenu() {
 }
 
 void manual() {
-    printf("********************\n");
+    printf("\n********************\n");
     printf("*                  *\n");
     printf("*       Used       *\n");
     printf("*   MIT - LICENSE  *\n");
@@ -76,7 +76,7 @@ void manual() {
     printf("*      diadntjr    *\n");
     printf("*      KEHyeon     *\n");
     printf("*                  *\n");
-    printf("********************\n");
+    printf("********************\n\n");
     printf("This is a comfortable English notebook\n");
     printf("When you enter some English vocabulary, it save to linkedlist.\n");
     printf("And it can delete vocabulary, and print all vocabulary in linkedlist.\n");
