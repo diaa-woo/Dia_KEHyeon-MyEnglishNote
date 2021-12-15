@@ -92,7 +92,8 @@ int printMenu() {
 }
 
 FILE* file(FILE* fp, linkedList_h* L) {
-
+    fp = fopen_s("C:/Users\SW2148\source\repos\(Dia,KEHyeon)-MyEnglishNote", "EnglishVocabulary", "r");
+    return fp;
 }
 
 void manual() {
