@@ -7,6 +7,7 @@ int main() {
     int menu = 1;
     linkedList_h* L;
     listNode* p;
+
     FILE* fp = 0;
 
     printf("Welcome! MyEnglishNote ver b1.0.0!\n\n");
@@ -27,7 +28,7 @@ int main() {
 
     while (1) {
         printf("File opening...\n");
-        fp = file(fp, L);
+        fp = file(fp, L);  //create new file
         if (fp != NULL) break;
         else printf("It's Failed! retry...\n");
         nullCount++;
@@ -59,7 +60,9 @@ int main() {
             break;
         }
     }
-    fclose(fp);
+
+    //fclose(fp);
+
     printf("Unlink LinkedList...\n");
     freeLinkedList_h(L);
     printf("Unlinked!\n");
@@ -100,9 +103,6 @@ FILE* file(FILE* fp, linkedList_h* L) {
     if (fp == NULL) return fp;
     while (feof(fp) == 0) {
         fgets(buf, 200, fp);
-        if (buf[0] == '[' && buf[2] == ']') continue;
-        else if (buf[0] == '-' && buf[8] == '-') continue;
-        printf("%s", buf);
     }
     return fp;
 }
