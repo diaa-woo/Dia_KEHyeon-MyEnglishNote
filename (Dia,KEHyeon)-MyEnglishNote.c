@@ -61,7 +61,7 @@ int main() {
         }
     }
 
-    //fclose(fp);
+    fclose(fp);
 
     printf("Unlink LinkedList...\n");
     freeLinkedList_h(L);

@@ -141,6 +141,9 @@
   <ItemGroup>
     <ClCompile Include="%28Dia,KEHyeon%29-MyEnglishNote.c" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="(Dia,KEHyeon)-MyEnglishNote(Header).h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
