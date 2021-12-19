@@ -1,6 +1,20 @@
 #define MAX_LENGTHS 25
+#define STACK_SIZE 225
 
 static int nullCount = 0;
+
+static int linkCount = 0;
+
+char vocaData[255][25] = { 0, };
+int vocaCount = 0;
+
+typedef char Data;
+typedef struct Stack {
+    Data buf[STACK_SIZE];
+    int top;
+}STACK;
+
+void createStack(STACK* s);
 
 typedef struct listNode {
     char data[25];
@@ -49,13 +63,13 @@ void printFirst();
 int printMenu();
 
 //새로운 영어단어를 입력받아줌
-void NewEnglishVoca();
+void NewEnglishVoca(linkedList_h* L, STACK* s);
 
 //영어단어를 삭제시켜줌
-void DeleteEnglishVoca();
+void DeleteEnglishVoca(linkedList_h* L);
 
 //현재 연결리스트에 존재하는 모든 영어단어들을 출력해줌
-void PrintEnglishVoca();
+void PrintEnglishVoca(linkedList_h* L);
 
 //현재 연결리스트에 존재하는 영단어들을 가지고 테스트를 진행함
-void TestEnglishVoca();
+void TestEnglishVoca(linkedList_h* L, STACK *s);

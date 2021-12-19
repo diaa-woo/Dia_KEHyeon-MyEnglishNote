@@ -4,11 +4,13 @@
 #include "(Dia,KEHyeon)-MyEnglishNote(Header).h"
 
 int main() {
+    STACK s;
     int menu = 1;
     linkedList_h* L;
     listNode* p;
+    createStack(&s);
 
-    FILE* fp = 0;
+    //FILE* fp = 0;
 
     printf("Welcome! MyEnglishNote ver b1.0.0!\n\n");
     printf("==============================================\n");
@@ -26,15 +28,15 @@ int main() {
     nullCount = 0;
     printf("==============================================\n");
 
-    while (1) {
+    /*while (1) {
         printf("File opening...\n");
         fp = file(fp, L);  //create new file
         if (fp != NULL) break;
         else printf("It's Failed! retry...\n");
         nullCount++;
     }
-    if (nullCount) printf("Opened! But...\nError counts: %d\n", nullCount);
-    else printf("Opened!\n");
+    if (nullCount) printf("Opened! But...\nError counts: %d\n", nullCount); 
+    else printf("Opened!\n");*/
     nullCount = 0;
     
     printFirst();  //Print some sentences when it start
@@ -47,21 +49,21 @@ int main() {
             manual();
             break;
         case 2:
-            NewEnglishVoca();
+            NewEnglishVoca(L ,&s);
             break;
         case 3:
-            DeleteEnglishVoca();
+            DeleteEnglishVoca(L);
             break;
         case 4:
-            PrintEnglishVoca();
+            PrintEnglishVoca(L);
             break;
         case 5:
-            TestEnglishVoca();
+            TestEnglishVoca(L, &s);
             break;
         }
     }
 
-    fclose(fp);
+    //fclose(fp);
 
     printf("Unlink LinkedList...\n");
     freeLinkedList_h(L);
@@ -126,22 +128,56 @@ void manual() {
     printf("So, Have fun!\n");
 }
 
-void NewEnglishVoca() {
+void NewEnglishVoca(linkedList_h* L, STACK* s) {
+    listNode* newNode;
+    listNode* pre;
+    newNode = (listNode*)malloc(sizeof(listNode));
     char voca[25] = { 0, };
     printf("Enter here!: ");
     scanf_s("%s", &voca, sizeof(voca));
+    strcpy_s(newNode->data, MAX_LENGTHS, voca);
+    newNode->link = L->head;
+    L->head = newNode;
+    for (int i = 0; voca[i] != '\0'; i++) {
+        s->buf[i] = voca[i];
+    }
+    s->top++;
+    return;
 }
 
-void DeleteEnglishVoca() {
-
+void DeleteEnglishVoca(linkedList_h* L) {
+    listNode* deleteNode;
+    listNode* p;
+    deleteNode = (listNode*)malloc(sizeof(listNode));
+    char voca[25] = { 0, };
+    scanf_s("%s", &voca, sizeof(voca));
+    p = searchNode(L, voca);
+    if (p == NULL) printf("It doesn't have Data!\n\n");
+    else {
+        strcpy_s(deleteNode->data, MAX_LENGTHS, p->data);
+        deleteNode->link = p->link;
+        p->link = deleteNode;
+        L->head = p->link;
+        printf("Suecess\n\n");
+    }
+    return;
 }
 
-void PrintEnglishVoca() {
-
+void PrintEnglishVoca(linkedList_h* L) {
+    printList(L);
+    printf("\n");
+    return;
 }
 
-void TestEnglishVoca() {
-
+void TestEnglishVoca(linkedList_h* L, STACK* s) {
+    char buf[50] = {0,};
+    int random = 0, i = 5;
+    random = rand() % (s->top);
+    while (i--) {
+        printf("%s? :");
+        scanf_s("%s", buf);
+    }
+    return;
 }
 
 linkedList_h* createLinkedList_h() {
@@ -205,7 +241,14 @@ listNode* searchNode(linkedList_h* L, char* x) {
     listNode* p;
     p = L->head;
     while (p != NULL) {
+   
         if (strcmp((p->data), x) == 0) return p;
         p = p->link;
     }
+    return NULL;
+}
+
+void createStack(STACK* s) {
+    s->top = -1;
+    return;
 }
